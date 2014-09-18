@@ -1,0 +1,27 @@
+Daemon 0
+
+User            "nobody"
+Group           "nogroup"
+RootJail       "/null"
+
+LogLevel        1
+LogFacility     -
+
+Control "/poundctl.socket"
+
+ListenHTTPS
+    Address 0.0.0.0
+    Port 443
+    Cert "/server.pem"
+    VerifyList "/product_placement+cacert.org_root.crt"
+    CAList "/product_placement+cacert.org_root.crt"
+End
+
+Service
+    #CheckURL ""
+    BackEnd
+        Address HTTP_PORT_80_TCP_ADDR
+        Port HTTP_PORT_80_TCP_PORT
+    End
+End
+

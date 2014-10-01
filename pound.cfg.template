@@ -8,6 +8,7 @@ LogLevel        1
 LogFacility     -
 
 Control "/poundctl.socket"
+TimeOut 120
 
 ListenHTTPS
     Address 0.0.0.0
@@ -18,10 +19,24 @@ ListenHTTPS
 End
 
 Service
-    #CheckURL ""
+    URL "^/rc"
     BackEnd
-        Address HTTP_PORT_80_TCP_ADDR
-        Port HTTP_PORT_80_TCP_PORT
+        Address RC_PORT_80_TCP_ADDR
+        Port RC_PORT_80_TCP_PORT
     End
 End
 
+Service
+    URL "^/sq"
+    BackEnd
+        Address SQ_PORT_80_TCP_ADDR
+        Port SQ_PORT_80_TCP_PORT
+    End
+End
+
+Service
+    BackEnd
+        Address STATIC_PORT_80_TCP_ADDR
+        Port STATIC_PORT_80_TCP_PORT
+    End
+End
